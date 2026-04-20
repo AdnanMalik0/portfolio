@@ -154,6 +154,12 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (continued)
+
+- **Mobile nav overhaul**: Removed hamburger/dropdown entirely on mobile. Nav links now display as a horizontally scrollable always-visible pill row below the logo — no tap required to reveal navigation
+- **Show more on all screens**: Removed mobile-only gate; Projects (>6), Certificates (>6), Awards (>4) now collapse and show a "Show all" button on both desktop and mobile
+- **Projects section heading**: Updated to "Explore My Projects" with more inviting copy that prompts visitors to click cards
+
 ## Recent Changes — 2026-04-20 (this session)
 
 - **Mobile section collapse**: Projects (>4), Certificates (>4), Awards (>3) now collapse on mobile (≤768px) with a "Show more" button — prevents excessively long scroll on phone

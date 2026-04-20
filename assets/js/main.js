@@ -649,38 +649,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const MOBILE_CARD_LIMIT = 4;
+  const CARD_LIMIT = 6;
   const showMoreWrap = document.getElementById('projects-show-more-wrap');
   const showMoreBtn = document.getElementById('projects-show-more-btn');
   const showMoreCount = document.getElementById('projects-show-more-count');
-  let mobileExpanded = false;
+  let cardsExpanded = false;
 
-  function isMobile() { return window.innerWidth <= 768; }
-
-  function applyMobileCollapse(visibleCards) {
-    if (!isMobile()) {
+  function applyCardCollapse(visibleCards) {
+    const overflow = visibleCards.length - CARD_LIMIT;
+    if (overflow <= 0 || cardsExpanded) {
       if (showMoreWrap) showMoreWrap.hidden = true;
       return;
     }
-    const overflow = visibleCards.length - MOBILE_CARD_LIMIT;
-    if (overflow <= 0 || mobileExpanded) {
-      if (showMoreWrap) showMoreWrap.hidden = true;
-      return;
-    }
-    visibleCards.slice(MOBILE_CARD_LIMIT).forEach(c => { c.dataset.mobileHidden = 'true'; c.style.display = 'none'; });
+    visibleCards.slice(CARD_LIMIT).forEach(c => { c.dataset.collapseHidden = 'true'; c.style.display = 'none'; });
     if (showMoreCount) showMoreCount.textContent = `(${visibleCards.length})`;
     if (showMoreWrap) showMoreWrap.hidden = false;
     if (showMoreBtn) showMoreBtn.setAttribute('aria-expanded', 'false');
   }
 
-  function clearMobileHidden() {
-    projectCards.forEach(c => { if (c.dataset.mobileHidden) { delete c.dataset.mobileHidden; } });
+  function clearCollapseHidden() {
+    projectCards.forEach(c => { if (c.dataset.collapseHidden) { delete c.dataset.collapseHidden; } });
   }
 
   if (showMoreBtn) {
     showMoreBtn.addEventListener('click', () => {
-      mobileExpanded = true;
-      clearMobileHidden();
+      cardsExpanded = true;
+      clearCollapseHidden();
       projectCards.forEach(c => {
         const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
         if (activeFilter === 'all' || c.dataset.category === activeFilter) c.style.display = '';
@@ -694,8 +688,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(button => button.classList.remove('active'));
       btn.classList.add('active');
-      mobileExpanded = false;
-      clearMobileHidden();
+      cardsExpanded = false;
+      clearCollapseHidden();
 
       const filter = btn.dataset.filter;
       const matched = [];
@@ -705,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (show) matched.push(card);
       });
 
-      applyMobileCollapse(matched);
+      applyCardCollapse(matched);
 
       if (selectedProjectCard && filter !== 'all' && selectedProjectCard.dataset.category !== filter) {
         hideProjectSpotlight();
@@ -713,14 +707,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Initial mobile collapse on page load
+  // Initial collapse on page load
   (function () {
     const allVisible = Array.from(projectCards).filter(c => c.style.display !== 'none');
-    applyMobileCollapse(allVisible);
+    applyCardCollapse(allVisible);
   })();
 
   function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit) {
-    if (!isMobile()) return;
     const items = Array.from(document.querySelectorAll(gridSelector));
     const wrap = document.getElementById(wrapId);
     const btn = document.getElementById(btnId);
@@ -736,8 +729,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 4);
-  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 3);
+  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 6);
+  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 4);
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
