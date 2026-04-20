@@ -226,6 +226,21 @@ document.addEventListener('DOMContentLoaded', () => {
     header?.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
+  // Scrollspy — highlight nav link for visible section
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const spySections = Array.from(document.querySelectorAll('section[id]'));
+  const headerHeight = header ? header.offsetHeight : 66;
+  const spyObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: `-${headerHeight}px 0px -55% 0px`, threshold: 0 });
+  spySections.forEach(sec => spyObserver.observe(sec));
+
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const projectSpotlight = document.getElementById('project-spotlight');
@@ -649,21 +664,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const MOBILE_CARD_LIMIT = 4;
+  const showMoreWrap = document.getElementById('projects-show-more-wrap');
+  const showMoreBtn = document.getElementById('projects-show-more-btn');
+  const showMoreCount = document.getElementById('projects-show-more-count');
+  let mobileExpanded = false;
+
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function applyMobileCollapse(visibleCards) {
+    if (!isMobile()) {
+      if (showMoreWrap) showMoreWrap.hidden = true;
+      return;
+    }
+    const overflow = visibleCards.length - MOBILE_CARD_LIMIT;
+    if (overflow <= 0 || mobileExpanded) {
+      if (showMoreWrap) showMoreWrap.hidden = true;
+      return;
+    }
+    visibleCards.slice(MOBILE_CARD_LIMIT).forEach(c => { c.dataset.mobileHidden = 'true'; c.style.display = 'none'; });
+    if (showMoreCount) showMoreCount.textContent = `(${visibleCards.length})`;
+    if (showMoreWrap) showMoreWrap.hidden = false;
+    if (showMoreBtn) showMoreBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  function clearMobileHidden() {
+    projectCards.forEach(c => { if (c.dataset.mobileHidden) { delete c.dataset.mobileHidden; } });
+  }
+
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      mobileExpanded = true;
+      clearMobileHidden();
+      projectCards.forEach(c => {
+        const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+        if (activeFilter === 'all' || c.dataset.category === activeFilter) c.style.display = '';
+      });
+      if (showMoreWrap) showMoreWrap.hidden = true;
+      if (showMoreBtn) showMoreBtn.setAttribute('aria-expanded', 'true');
+    });
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(button => button.classList.remove('active'));
       btn.classList.add('active');
+      mobileExpanded = false;
+      clearMobileHidden();
 
       const filter = btn.dataset.filter;
+      const matched = [];
       projectCards.forEach(card => {
-        card.style.display = filter === 'all' || card.dataset.category === filter ? '' : 'none';
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) matched.push(card);
       });
+
+      applyMobileCollapse(matched);
 
       if (selectedProjectCard && filter !== 'all' && selectedProjectCard.dataset.category !== filter) {
         hideProjectSpotlight();
       }
     });
   });
+
+  // Initial mobile collapse on page load
+  (function () {
+    const allVisible = Array.from(projectCards).filter(c => c.style.display !== 'none');
+    applyMobileCollapse(allVisible);
+  })();
+
+  function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit) {
+    if (!isMobile()) return;
+    const items = Array.from(document.querySelectorAll(gridSelector));
+    const wrap = document.getElementById(wrapId);
+    const btn = document.getElementById(btnId);
+    const countEl = document.getElementById(countId);
+    if (!wrap || !btn || items.length <= limit) return;
+    items.slice(limit).forEach(el => { el.dataset.sectionHidden = 'true'; el.style.display = 'none'; });
+    if (countEl) countEl.textContent = `(${items.length})`;
+    wrap.hidden = false;
+    btn.addEventListener('click', () => {
+      items.forEach(el => { delete el.dataset.sectionHidden; el.style.display = ''; });
+      wrap.hidden = true;
+      btn.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 4);
+  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 3);
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {

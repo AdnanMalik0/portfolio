@@ -142,10 +142,21 @@ Chunked implementation plan:
 - Switched the deployment plan to standard GitHub Pages branch publishing from `main` root, which is sufficient for this static site
 - Pushed the `main` branch successfully to GitHub
 
+## Deployment Status
+
+- **Live URL**: `https://adnanmalik0.github.io/portfolio`
+- **Deployment method**: GitHub Pages branch publishing from `main` root
+- **Last confirmed live check**: 2026-04-20 — site loads fully, all sections visible (hero, about, experience, 14 project cards, education, certifications, awards, contact), navigation anchors intact, no broken elements detected
+
 ## Next Likely Work Items
 
 - Add project screenshots to `assets/images/projects/`
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
-- Enable `Deploy from a branch` in GitHub Pages settings using `main` and `/(root)`
+
+## Recent Changes — 2026-04-20 (this session)
+
+- **Mobile section collapse**: Projects (>4), Certificates (>4), Awards (>3) now collapse on mobile (≤768px) with a "Show more" button — prevents excessively long scroll on phone
+- **Sticky nav on mobile**: Removed the `header { position: relative }` override that was disabling sticky behaviour on mobile; header now stays pinned at top on all screen sizes
+- **Scrollspy**: Added `IntersectionObserver`-based scrollspy that highlights the active nav link as the user scrolls through each section (works on both desktop and mobile)
 
