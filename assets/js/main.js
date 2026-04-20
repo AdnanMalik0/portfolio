@@ -768,6 +768,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 3, 'certificates');
   initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 2, 'awards');
 
+  document.querySelectorAll('.exp-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const details = btn.nextElementSibling;
+      if (details) details.hidden = expanded;
+    });
+  });
+
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

@@ -154,6 +154,10 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Experience accordion**: Both exp cards now collapsed by default showing only role, period, and company. Clicking expands to reveal tech tags, bullet points, and KPI pills. Chevron rotates on expand/collapse.
+
 ## Recent Changes — 2026-04-20 (latest)
 
 - **Hero stat alignment**: Each stat block now uses flex-column + align-items center so "5+", badges, and labels are all centre-aligned consistently across all four stats on desktop and mobile
