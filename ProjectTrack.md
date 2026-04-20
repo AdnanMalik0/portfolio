@@ -10,7 +10,7 @@ Rule:
 
 - Project type: static portfolio website
 - Main files: `index.html`, `assets/css/style.css`, `assets/js/main.js`, `assets/js/project-note-content.js`
-- Version control status: Git is initialised locally on `main`, the first commits exist, the GitHub remote is configured, and the branch has now been pushed to GitHub at `https://github.com/AdnanMalik0/portfolio`
+- Version control status: Git is initialised locally on `main`, the current `origin` remote is `git@github.com:AdnanMalik0/portfolio.git`, and the branch has been pushed to GitHub
 - Current site status: portfolio structure is built and populated with real content
 - Resume status: `resume.pdf` exists in project root and is linked in the site
 - Photo status: `assets/images/photo.jpg` exists and is linked in the site
@@ -18,6 +18,8 @@ Rule:
 - Project screenshots status: `assets/images/projects/` is still empty, so project preview images currently fall back when missing
 - Masarif status: GitHub and live demo links are now present in the project card and spotlight flow
 - Project spotlight status: project cards now open a centered single-column popup/modal with inline markdown content, external links, and internal popup scrolling
+- Project deep-link status: project popups now sync with `#project-*` URL hashes, auto-open when a matching project hash is visited, and expose a copy-link action inside the popup
+- Resume-linking status: the popup deep-link flow is suitable for CV/resume project references, so employers can open a project-specific URL and land directly on that project's detail popup without navigating manually through the site
 - Note-loading status: popup notes now have an embedded-content fallback via `assets/js/project-note-content.js`, so they do not rely only on browser markdown file loading
 - Note quality status: current project-note content has been strengthened against the master resume, GitHub repos, and local source documents so the popup text reflects stronger outcomes, methods, and standout details
 
@@ -153,6 +155,22 @@ Chunked implementation plan:
 - Add project screenshots to `assets/images/projects/`
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
+
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Tracker sync deployment**: Prepared the current `ProjectTrack.md` updates for commit and push so GitHub reflects the confirmed SSH remote, popup deep-linking, and resume-ready project-link behaviour recorded in this session
+
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Resume-ready popup links**: Confirmed the `#project-*` deep-link behaviour matches the intended CV/resume use case, so project mentions can point straight to the relevant popup content on load
+
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Git remote baseline**: Confirmed the repository `origin` is using the SSH remote `git@github.com:AdnanMalik0/portfolio.git`; tracker wording updated to match the actual repo config
+
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Project popup deep-linking**: Opening a project popup now updates the URL to a shareable `#project-*` hash, visiting a matching hash auto-opens that project, and the popup header now includes a `Copy link` action for direct sharing
 
 ## Recent Changes — 2026-04-20 (latest+)
 
