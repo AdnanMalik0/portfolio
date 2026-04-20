@@ -765,8 +765,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 6, 'certificates');
-  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 4, 'awards');
+  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 3, 'certificates');
+  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 2, 'awards');
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
