@@ -154,6 +154,12 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (latest)
+
+- **About section title**: Changed to "BI & Data Analyst · ML Practitioner & Engineer"
+- **Projects heading**: Updated to "A Glimpse of My Work" with copy that communicates these are a curated selection from a broader body of work
+- **Projects initial cards**: Reduced from 6 to 3 cards shown before "Show all" button
+
 ## Recent Changes — 2026-04-20 (continued)
 
 - **Mobile nav overhaul**: Removed hamburger/dropdown entirely on mobile. Nav links now display as a horizontally scrollable always-visible pill row below the logo — no tap required to reveal navigation

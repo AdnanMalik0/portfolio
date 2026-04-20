@@ -649,7 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const CARD_LIMIT = 6;
+  const CARD_LIMIT = 3;
   const showMoreWrap = document.getElementById('projects-show-more-wrap');
   const showMoreBtn = document.getElementById('projects-show-more-btn');
   const showMoreCount = document.getElementById('projects-show-more-count');
