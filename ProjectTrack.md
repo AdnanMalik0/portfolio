@@ -154,6 +154,10 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Project card order**: First 3 cards (default visible) are now: ML Solubility → Serial Killers Age Analysis (R) → Masarif
+
 ## Recent Changes — 2026-04-20 (latest)
 
 - **About section title**: Changed to "BI & Data Analyst · ML Practitioner & Engineer"
