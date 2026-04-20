@@ -154,6 +154,12 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (latest)
+
+- **Hero stat alignment**: Each stat block now uses flex-column + align-items center so "5+", badges, and labels are all centre-aligned consistently across all four stats on desktop and mobile
+- **Certs default**: Reduced from 6 to 3 shown before "Show all" button
+- **Awards default**: Reduced from 4 to 2 shown before "Show all" button
+
 ## Recent Changes — 2026-04-20 (theme & content)
 
 - **Hero background**: Darkened further to near-black deep green #021a0c
