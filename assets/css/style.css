@@ -869,6 +869,17 @@ body.modal-open {
   background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.86) 100%);
   backdrop-filter: blur(8px);
 }
+.project-spotlight-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.project-spotlight-copylink {
+  font-size: 0.78rem;
+  padding: 0.28rem 0.7rem;
+  white-space: nowrap;
+}
 .project-spotlight-header h3 {
   font-size: 1.65rem;
   margin-top: 0.2rem;

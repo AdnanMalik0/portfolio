@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ).filter(element => !element.hasAttribute('hidden'));
   };
 
-  const hideProjectSpotlight = () => {
+  const hideProjectSpotlight = (restoreHash = true) => {
     if (!projectSpotlight) return;
 
     projectSpotlight.hidden = true;
@@ -529,6 +529,9 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedProjectCard = null;
     lastFocusedElement?.focus?.();
     lastFocusedElement = null;
+    if (restoreHash && location.hash.startsWith('#project-')) {
+      history.pushState('', document.title, location.pathname + location.search);
+    }
   };
 
   const cloneCardLinks = links => {
@@ -591,6 +594,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('modal-open');
     projectSpotlightShell?.scrollTo({ top: 0, behavior: 'auto' });
     projectSpotlightClose?.focus();
+
+    if (projectKey) {
+      history.pushState({ project: projectKey }, '', `#project-${projectKey}`);
+    }
   };
 
   projectCards.forEach(card => {
@@ -614,6 +621,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       event.preventDefault();
       openProjectSpotlight(card);
+    });
+  });
+
+  const projectSpotlightCopyLink = document.querySelector('.project-spotlight-copylink');
+  projectSpotlightCopyLink?.addEventListener('click', () => {
+    const url = location.href;
+    navigator.clipboard?.writeText(url).then(() => {
+      const orig = projectSpotlightCopyLink.textContent;
+      projectSpotlightCopyLink.textContent = 'Copied!';
+      setTimeout(() => { projectSpotlightCopyLink.textContent = orig; }, 1800);
     });
   });
 
@@ -723,6 +740,20 @@ document.addEventListener('DOMContentLoaded', () => {
   (function () {
     const allVisible = Array.from(projectCards).filter(c => c.style.display !== 'none');
     applyCardCollapse(allVisible);
+  })();
+
+  (function () {
+    const hash = location.hash;
+    if (!hash.startsWith('#project-')) return;
+    const key = hash.slice('#project-'.length);
+    const target = Array.from(projectCards).find(c => c.dataset.project === key);
+    if (!target) return;
+    if (target.dataset.collapseHidden || target.dataset.sectionHidden || target.style.display === 'none') {
+      target.style.display = '';
+      delete target.dataset.collapseHidden;
+      delete target.dataset.sectionHidden;
+    }
+    openProjectSpotlight(target);
   })();
 
   function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit, sectionId) {
