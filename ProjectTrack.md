@@ -158,7 +158,7 @@ Chunked implementation plan:
 
 ## Recent Changes — 2026-04-20 (latest+)
 
-- **Tracker sync deployment**: Prepared the current `ProjectTrack.md` updates for commit and push so GitHub reflects the confirmed SSH remote, popup deep-linking, and resume-ready project-link behaviour recorded in this session
+- **Tracker sync deployment**: Committed and pushed the current `ProjectTrack.md` updates so GitHub now reflects the confirmed SSH remote, popup deep-linking, and resume-ready project-link behaviour recorded in this session
 
 ## Recent Changes — 2026-04-20 (latest+)
 
