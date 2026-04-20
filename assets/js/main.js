@@ -226,21 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     header?.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
-  // Scrollspy — highlight nav link for visible section
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  const spySections = Array.from(document.querySelectorAll('section[id]'));
-  const headerHeight = header ? header.offsetHeight : 66;
-  const spyObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
-        });
-      }
-    });
-  }, { rootMargin: `-${headerHeight}px 0px -55% 0px`, threshold: 0 });
-  spySections.forEach(sec => spyObserver.observe(sec));
-
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const projectSpotlight = document.getElementById('project-spotlight');
