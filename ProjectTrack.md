@@ -10,7 +10,7 @@ Rule:
 
 - Project type: static portfolio website
 - Main files: `index.html`, `assets/css/style.css`, `assets/js/main.js`, `assets/js/project-note-content.js`
-- Version control status: Git is initialised locally on `main`, the first local commit exists, the GitHub remote is configured, and the next deployment step is pushing the branch
+- Version control status: Git is initialised locally on `main`, the first commits exist, the GitHub remote is configured, and the branch has now been pushed to GitHub at `https://github.com/AdnanMalik0/portfolio`
 - Current site status: portfolio structure is built and populated with real content
 - Resume status: `resume.pdf` exists in project root and is linked in the site
 - Photo status: `assets/images/photo.jpg` exists and is linked in the site
@@ -140,11 +140,12 @@ Chunked implementation plan:
 - Created the first local Git commit: `Initial portfolio site`
 - Removed the GitHub Actions Pages workflow after GitHub rejected workflow-file push permissions for this account context
 - Switched the deployment plan to standard GitHub Pages branch publishing from `main` root, which is sufficient for this static site
+- Pushed the `main` branch successfully to GitHub
 
 ## Next Likely Work Items
 
 - Add project screenshots to `assets/images/projects/`
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
-- Push the project to GitHub and enable `Deploy from a branch` in GitHub Pages settings using `main` and `/(root)`
+- Enable `Deploy from a branch` in GitHub Pages settings using `main` and `/(root)`
 
