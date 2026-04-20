@@ -154,6 +154,30 @@ Chunked implementation plan:
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
 
+## Recent Changes — 2026-04-20 (theme & content)
+
+- **Hero background**: Darkened further to near-black deep green #021a0c
+- **Location removed**: Removed all mentions of UAE, Saudi Arabia, Qatar, GCC, and "Open to relocation" location lists — kept generic
+- **Show more/less toggle**: Single button toggles between "Show all X" and "Show less" for Projects, Certs, Awards; "Show less" scrolls back to section top
+- **Projects heading**: "Selected Projects"
+- **Projects description**: Simplified one-liner
+- **About role title**: "BI & Data Analyst · ML Practitioner & Engineer"
+- **Project card order**: First 3 shown are Solubility → Serial Killers (R) → Masarif
+
+## Recent Changes — 2026-04-20 (theme)
+
+- **Colour theme**: Changed from cyan/blue to dark green. Accent is now green-600 (#16a34a), dark #15803d, darker #166534, light tint #f0fdf4. Gradient goes green-600 → emerald-600. All rgba shadow/glow values updated to match.
+
+## Recent Changes — 2026-04-20 (latest++)
+
+- **Show more/less toggle**: Single button now toggles between "Show all X" and "Show less" for Projects, Certificates, and Awards. Clicking "Show less" collapses and scrolls back to the section.
+- **Projects heading**: "Selected Projects"
+- **Projects description**: Simplified — "Explore some of my projects below — spanning machine learning research, statistical analysis, BI dashboards, and engineering systems."
+
+## Recent Changes — 2026-04-20 (latest+)
+
+- **Show less toggle**: All three collapsible sections (Projects, Certificates, Awards) now show a "Show less" button at the top of the list after expanding, and the "Show all" button at the bottom disappears. Clicking "Show less" collapses back and scrolls to the section top.
+
 ## Recent Changes — 2026-04-20 (latest+)
 
 - **Project card order**: First 3 cards (default visible) are now: ML Solubility → Serial Killers Age Analysis (R) → Masarif

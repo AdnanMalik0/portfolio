@@ -655,32 +655,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const showMoreCount = document.getElementById('projects-show-more-count');
   let cardsExpanded = false;
 
+  function setProjectsBtnState(expanded, total) {
+    if (!showMoreBtn) return;
+    if (expanded) {
+      showMoreBtn.firstChild.textContent = 'Show less';
+      showMoreBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      showMoreBtn.firstChild.textContent = 'Show all projects ';
+      if (showMoreCount) showMoreCount.textContent = `(${total})`;
+      showMoreBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
   function applyCardCollapse(visibleCards) {
-    const overflow = visibleCards.length - CARD_LIMIT;
-    if (overflow <= 0 || cardsExpanded) {
+    if (visibleCards.length <= CARD_LIMIT) {
       if (showMoreWrap) showMoreWrap.hidden = true;
       return;
     }
-    visibleCards.slice(CARD_LIMIT).forEach(c => { c.dataset.collapseHidden = 'true'; c.style.display = 'none'; });
-    if (showMoreCount) showMoreCount.textContent = `(${visibleCards.length})`;
+    if (!cardsExpanded) {
+      visibleCards.slice(CARD_LIMIT).forEach(c => { c.dataset.collapseHidden = 'true'; c.style.display = 'none'; });
+    }
     if (showMoreWrap) showMoreWrap.hidden = false;
-    if (showMoreBtn) showMoreBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  function clearCollapseHidden() {
-    projectCards.forEach(c => { if (c.dataset.collapseHidden) { delete c.dataset.collapseHidden; } });
+    setProjectsBtnState(cardsExpanded, visibleCards.length);
   }
 
   if (showMoreBtn) {
     showMoreBtn.addEventListener('click', () => {
-      cardsExpanded = true;
-      clearCollapseHidden();
-      projectCards.forEach(c => {
-        const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
-        if (activeFilter === 'all' || c.dataset.category === activeFilter) c.style.display = '';
-      });
-      if (showMoreWrap) showMoreWrap.hidden = true;
-      if (showMoreBtn) showMoreBtn.setAttribute('aria-expanded', 'true');
+      cardsExpanded = !cardsExpanded;
+      const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+      const visible = Array.from(projectCards).filter(c => activeFilter === 'all' || c.dataset.category === activeFilter);
+      if (cardsExpanded) {
+        visible.forEach(c => { delete c.dataset.collapseHidden; c.style.display = ''; });
+        setProjectsBtnState(true, visible.length);
+      } else {
+        visible.forEach((c, i) => {
+          if (i >= CARD_LIMIT) { c.dataset.collapseHidden = 'true'; c.style.display = 'none'; }
+        });
+        setProjectsBtnState(false, visible.length);
+        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
@@ -689,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filterBtns.forEach(button => button.classList.remove('active'));
       btn.classList.add('active');
       cardsExpanded = false;
-      clearCollapseHidden();
+      projectCards.forEach(c => { delete c.dataset.collapseHidden; });
 
       const filter = btn.dataset.filter;
       const matched = [];
@@ -707,30 +720,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Initial collapse on page load
   (function () {
     const allVisible = Array.from(projectCards).filter(c => c.style.display !== 'none');
     applyCardCollapse(allVisible);
   })();
 
-  function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit) {
+  function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit, sectionId) {
     const items = Array.from(document.querySelectorAll(gridSelector));
     const wrap = document.getElementById(wrapId);
     const btn = document.getElementById(btnId);
     const countEl = document.getElementById(countId);
     if (!wrap || !btn || items.length <= limit) return;
-    items.slice(limit).forEach(el => { el.dataset.sectionHidden = 'true'; el.style.display = 'none'; });
-    if (countEl) countEl.textContent = `(${items.length})`;
-    wrap.hidden = false;
-    btn.addEventListener('click', () => {
+    let expanded = false;
+
+    function collapse() {
+      items.forEach((el, i) => {
+        if (i >= limit) { el.dataset.sectionHidden = 'true'; el.style.display = 'none'; }
+        else { delete el.dataset.sectionHidden; el.style.display = ''; }
+      });
+      if (countEl) countEl.textContent = `(${items.length})`;
+      btn.firstChild.textContent = btn.dataset.labelMore || 'Show all ';
+      if (countEl) btn.appendChild(countEl);
+      btn.setAttribute('aria-expanded', 'false');
+      wrap.hidden = false;
+    }
+
+    function expand() {
       items.forEach(el => { delete el.dataset.sectionHidden; el.style.display = ''; });
-      wrap.hidden = true;
+      btn.firstChild.textContent = 'Show less';
       btn.setAttribute('aria-expanded', 'true');
+    }
+
+    btn.dataset.labelMore = btn.firstChild.textContent;
+    collapse();
+
+    btn.addEventListener('click', () => {
+      expanded = !expanded;
+      if (expanded) {
+        expand();
+      } else {
+        collapse();
+        if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
-  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 6);
-  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 4);
+  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 6, 'certificates');
+  initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 4, 'awards');
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
