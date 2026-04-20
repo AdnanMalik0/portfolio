@@ -22,12 +22,9 @@ Static portfolio website prepared for GitHub Pages deployment.
 1. Create a new GitHub repository.
 2. Push this folder to the repository on the `main` branch.
 3. In the GitHub repository, open `Settings` -> `Pages`.
-4. Under `Build and deployment`, choose `Source: GitHub Actions`.
-5. Push to `main` and let the `Deploy Portfolio to GitHub Pages` workflow publish the site.
-
-The workflow file is:
-
-- `.github/workflows/deploy-pages.yml`
+4. Under `Build and deployment`, choose `Source: Deploy from a branch`.
+5. Set `Branch: main` and `Folder: /(root)`.
+6. Save the settings and wait for GitHub Pages to publish the site.
 
 ## Before Sharing with Employers
 

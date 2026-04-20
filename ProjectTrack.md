@@ -10,7 +10,7 @@ Rule:
 
 - Project type: static portfolio website
 - Main files: `index.html`, `assets/css/style.css`, `assets/js/main.js`, `assets/js/project-note-content.js`
-- Version control status: Git is now initialised locally in this folder on the `main` branch, but nothing has been committed or pushed yet
+- Version control status: Git is initialised locally on `main`, the first local commit exists, the GitHub remote is configured, and the next deployment step is pushing the branch
 - Current site status: portfolio structure is built and populated with real content
 - Resume status: `resume.pdf` exists in project root and is linked in the site
 - Photo status: `assets/images/photo.jpg` exists and is linked in the site
@@ -123,8 +123,8 @@ Chunked implementation plan:
 - Standardised project-facing wording so `GitHub Repository` is used instead of plain `repository`
 - Hardened the popup for long-note reading by restoring focus to the clicked card on close, trapping keyboard focus inside the modal, and resetting modal scroll to the top on open
 - Added small scrollbar and scrolling refinements to make long project notes feel cleaner inside the popup
-- Added GitHub Pages deployment files: `.github/workflows/deploy-pages.yml`, `.nojekyll`, `404.html`, and `README.md`
-- Prepared the project for GitHub Pages publishing through a GitHub Actions deployment flow on the `main` branch
+- Added GitHub Pages deployment support files: `.nojekyll`, `404.html`, and `README.md`
+- Prepared the project for GitHub Pages publishing as a static site from the `main` branch root
 - Initialised Git locally in this folder with the `main` branch so it is ready to connect to a GitHub remote
 - Extracted and reviewed the master resume source `Resumes & Certs/Adnan Malik Resume GCC - Master.docx` to capture project details that were stronger than the older markdown notes
 - Re-read current portfolio projects against all available sources: GitHub repos where applicable, the master resume, and local PDF/HTML source documents for non-GitHub projects
@@ -136,11 +136,15 @@ Chunked implementation plan:
 - Renamed the popup section label from `Project Assets` to `Evidence Included`
 - Renamed the popup note section label from `Portfolio Note` to `Project Overview`
 - Removed internal local-path phrasing from the non-GitHub project notes where that wording was not useful to a portfolio viewer
+- Connected the local repository to `https://github.com/AdnanMalik0/portfolio`
+- Created the first local Git commit: `Initial portfolio site`
+- Removed the GitHub Actions Pages workflow after GitHub rejected workflow-file push permissions for this account context
+- Switched the deployment plan to standard GitHub Pages branch publishing from `main` root, which is sufficient for this static site
 
 ## Next Likely Work Items
 
 - Add project screenshots to `assets/images/projects/`
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
-- Push the project to GitHub and enable `GitHub Actions` as the Pages source in repository settings
+- Push the project to GitHub and enable `Deploy from a branch` in GitHub Pages settings using `main` and `/(root)`
 
