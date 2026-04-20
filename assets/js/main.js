@@ -772,6 +772,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
+      const label = btn.querySelector('span');
+      if (label) label.textContent = expanded ? 'Show details' : 'Hide details';
       const details = btn.nextElementSibling;
       if (details) details.hidden = expanded;
     });
