@@ -829,7 +829,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         navItems.forEach(item => item.classList.remove('active'));
         const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-        if (link) link.classList.add('active');
+        if (link) {
+          link.classList.add('active');
+          const container = link.closest('.nav-links');
+          if (container) {
+            const linkMid = link.offsetLeft + link.offsetWidth / 2;
+            container.scrollTo({ left: linkMid - container.clientWidth / 2, behavior: 'smooth' });
+          }
+        }
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
