@@ -15,6 +15,8 @@ Rule:
 - Resume status: `resume.pdf` exists in project root and is linked in the site
 - Photo status: `assets/images/photo.jpg` exists and is linked in the site
 - Certificates status: local certificate files exist in `assets/certificates/`
+- Certificates UI status: the certificates section now supports category filters aligned to the site's existing taxonomy (`BI & Visualisation`, `Machine Learning & AI`, `Data & Tools`, `Recognition`)
+- Certificate follow-up reminder: add `Encore Award` and `Innovator Award` certificate files to `assets/certificates/` and link them into the site when available
 - Project screenshots status: `assets/images/projects/` is still empty, so project preview images currently fall back when missing
 - Masarif status: GitHub and live demo links are now present in the project card and spotlight flow
 - Project spotlight status: project cards now open a centered single-column popup/modal with inline markdown content, external links, and internal popup scrolling
@@ -30,6 +32,10 @@ Rule:
 - `2026-04-20 13:33:26`: `project-details/*.md` GitHub-backed project note files were added/updated
 - `2026-04-20 13:34:50`: `assets/js/main.js` updated to power the project spotlight, `Open Details` buttons, and markdown-note linking
 - `2026-04-20`: `index.html`, `assets/css/style.css`, and `assets/js/main.js` updated so project cards open the spotlight directly, show inline markdown note content, and surface live-app links such as Masarif
+- `2026-04-22 09:56:26`: `index.html`, `assets/css/style.css`, and `assets/js/main.js` updated so the certificates section supports category filters, includes the newly added certificate assets, and keeps the certificate show-more behaviour in sync with filtering
+- `2026-04-22`: certificate verification URLs were audited live; broken Stanford and LinkedIn verify links were replaced with local PDFs, and `Claude 101` was switched to a working Skilljar verification URL
+- `2026-04-22`: certificate filter priority was reordered to lead with `Recognition`, and certificate display order was updated to rank recognition first, then ML/AI, then BI, then tools
+- `2026-04-22`: certificate filters were adjusted again so `All` is first and selected by default; the collapsed default `All` view now highlights three curated certificates, while expanded `All` still follows the full agreed value ranking
 
 ## GitHub Coverage Check For Portfolio Projects
 
@@ -94,6 +100,16 @@ Chunked implementation plan:
 - Chunk 5: verify the updated JavaScript and modal hooks
 
 ## Latest Change Log
+
+### 2026-04-22
+
+- Added certificate category filters to the portfolio using the same taxonomy already used elsewhere in the site (`BI & Visualisation`, `Machine Learning & AI`, `Data & Tools`, `Recognition`)
+- Added the newly supplied Microsoft Learn, Power BI, Claude, and AI-for-Work certificate files into the certificates section
+- Updated the certificate JavaScript so filter counts and the "Show all certificates" control work together correctly
+- Recorded the follow-up reminder that `Encore Award` and `Innovator Award` certificate files still need to be added and linked later
+- Verified live certificate URLs on 2026-04-22: `verify.skilljar.com` for `Claude 101` returned `200 OK`; the two LinkedIn Learning certificate URLs returned `404 Not Found`; the Stanford verification hostname did not resolve from the check environment, so those broken verify links were replaced with local PDFs
+- Reordered the certificate experience to prioritise `Recognition` in filters and rank certificates by portfolio value rather than by file-add order
+- Updated the default certificate landing state so visitors first see a curated top-three (`Certificate of Commendation`, `Data Scientist with Python Track`, `Applied Machine Learning: Foundations`) before expanding the full ranked list
 
 ### 2026-04-20
 

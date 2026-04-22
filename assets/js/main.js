@@ -228,6 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
+  const certFilterBtns = Array.from(document.querySelectorAll('.cert-filter-btn'));
+  const certCards = Array.from(document.querySelectorAll('.certs-grid .cert-card'));
+  const certGrid = document.querySelector('.certs-grid');
   const projectSpotlight = document.getElementById('project-spotlight');
   const projectSpotlightTitle = document.getElementById('project-spotlight-title');
   const projectSpotlightCategory = document.getElementById('project-spotlight-category');
@@ -756,6 +759,204 @@ document.addEventListener('DOMContentLoaded', () => {
     openProjectSpotlight(target);
   })();
 
+  const inferCertCategory = card => {
+    const name = card.querySelector('.cert-name')?.textContent?.trim().toLowerCase() || '';
+    const issuer = card.querySelector('.cert-issuer')?.textContent?.trim().toLowerCase() || '';
+
+    if (
+      name.includes('commendation') ||
+      name.includes('merit') ||
+      name.includes('appreciation')
+    ) {
+      return 'recognition';
+    }
+
+    if (
+      issuer.includes('microsoft learn') ||
+      name.includes('power bi') ||
+      name.includes('powerbi') ||
+      name.includes('data analysis')
+    ) {
+      return 'bi';
+    }
+
+    if (
+      name.includes('machine learning') ||
+      name.includes('data scientist') ||
+      name.includes('advanced sql') ||
+      name.includes('claude') ||
+      name.includes('future-proof your career with ai')
+    ) {
+      return 'ml';
+    }
+
+    if (
+      name === 'sql' ||
+      name.includes('big data') ||
+      name.includes('bootcamp') ||
+      name.includes('data services')
+    ) {
+      return 'tools';
+    }
+
+    return 'all';
+  };
+
+  const certOrderRank = card => {
+    const name = card.querySelector('.cert-name')?.textContent?.trim() || '';
+    const category = card.dataset.category || inferCertCategory(card);
+
+    const explicitOrder = {
+      'Certificate of Commendation — MSc Poster Session': 1,
+      'Certificate of Merit — Best Project, TechKnow-2016': 2,
+      'Certificate of Appreciation — Technical Presentation': 3,
+      'Data Scientist with Python Track': 4,
+      'Applied Machine Learning: Foundations': 5,
+      'Machine Learning Advanced Certification Training': 6,
+      'Claude 101': 7,
+      'Future-Proof Your Career with AI': 8,
+      'Advanced SQL for Data Scientists': 9,
+      'Get Started Building in Power BI': 10,
+      'Copilot in Power BI': 11,
+      'Discover Data Analysis': 12,
+      'Certificate of Attendance - Power BI QA Course': 13,
+      'Microsoft Learn Achievement': 14,
+      'SQL': 15,
+      'Big Data Hadoop and Spark Developer': 16,
+      'Analytics Bootcamp 101': 17,
+      'LatentView Data Services Foundation': 18
+    };
+
+    if (explicitOrder[name]) {
+      return explicitOrder[name];
+    }
+
+    const categoryBase = {
+      recognition: 100,
+      ml: 200,
+      bi: 300,
+      tools: 400,
+      all: 500
+    };
+
+    return categoryBase[category] || 999;
+  };
+
+  const certFeaturedRank = card => {
+    const name = card.querySelector('.cert-name')?.textContent?.trim() || '';
+    const featuredOrder = {
+      'Certificate of Commendation — MSc Poster Session': 1,
+      'Data Scientist with Python Track': 2,
+      'Applied Machine Learning: Foundations': 3
+    };
+
+    if (featuredOrder[name]) {
+      return featuredOrder[name];
+    }
+
+    return 100 + certOrderRank(card);
+  };
+
+  certCards.forEach(card => {
+    if (!card.dataset.category) {
+      card.dataset.category = inferCertCategory(card);
+    }
+  });
+
+  const certShowMoreWrap = document.getElementById('certs-show-more-wrap');
+  const certShowMoreBtn = document.getElementById('certs-show-more-btn');
+  const certShowMoreCount = document.getElementById('certs-show-more-count');
+  const CERT_CARD_LIMIT = 3;
+  let certCardsExpanded = false;
+
+  const defaultCertFilter = certFilterBtns[0]?.dataset.filter || 'all';
+
+  const updateCertFilterCounts = () => {
+    certFilterBtns.forEach(btn => {
+      const countEl = btn.querySelector('.filter-count');
+      if (!countEl) return;
+
+      const filter = btn.dataset.filter || 'all';
+      const total = filter === 'all'
+        ? certCards.length
+        : certCards.filter(card => card.dataset.category === filter).length;
+
+      countEl.textContent = total;
+    });
+  };
+
+  const setCertShowMoreState = (expanded, total) => {
+    if (!certShowMoreBtn) return;
+
+    if (expanded) {
+      certShowMoreBtn.firstChild.textContent = 'Show less';
+      certShowMoreBtn.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
+    certShowMoreBtn.firstChild.textContent = 'Show all certificates ';
+    if (certShowMoreCount) certShowMoreCount.textContent = `(${total})`;
+    certShowMoreBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  const renderCertificates = () => {
+    const activeFilter = document.querySelector('.cert-filter-btn.active')?.dataset.filter || defaultCertFilter;
+    const sortRank = activeFilter === 'all' && !certCardsExpanded ? certFeaturedRank : certOrderRank;
+    const orderedCards = certCards
+      .slice()
+      .sort((a, b) => sortRank(a) - sortRank(b));
+    let matchedCount = 0;
+
+    orderedCards.forEach(card => certGrid?.appendChild(card));
+
+    orderedCards.forEach(card => {
+      const matches = activeFilter === 'all' || card.dataset.category === activeFilter;
+      if (!matches) {
+        card.style.display = 'none';
+        delete card.dataset.sectionHidden;
+        return;
+      }
+
+      const shouldShow = certCardsExpanded || matchedCount < CERT_CARD_LIMIT;
+      if (shouldShow) {
+        delete card.dataset.sectionHidden;
+        card.style.display = '';
+      } else {
+        card.dataset.sectionHidden = 'true';
+        card.style.display = 'none';
+      }
+
+      matchedCount += 1;
+    });
+
+    if (certShowMoreWrap) {
+      certShowMoreWrap.hidden = matchedCount <= CERT_CARD_LIMIT;
+    }
+
+    setCertShowMoreState(certCardsExpanded && matchedCount > CERT_CARD_LIMIT, matchedCount);
+  };
+
+  certShowMoreBtn?.addEventListener('click', () => {
+    certCardsExpanded = !certCardsExpanded;
+    renderCertificates();
+
+    if (!certCardsExpanded) {
+      document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  certFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      certFilterBtns.forEach(button => button.classList.remove('active'));
+      btn.classList.add('active');
+      certCardsExpanded = false;
+      renderCertificates();
+    });
+  });
+
+  updateCertFilterCounts();
+  renderCertificates();
+
   function initSectionCollapse(gridSelector, wrapId, btnId, countId, limit, sectionId) {
     const items = Array.from(document.querySelectorAll(gridSelector));
     const wrap = document.getElementById(wrapId);
@@ -796,7 +997,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initSectionCollapse('.certs-grid .cert-card', 'certs-show-more-wrap', 'certs-show-more-btn', 'certs-show-more-count', 3, 'certificates');
   initSectionCollapse('.awards-grid .award-card', 'awards-show-more-wrap', 'awards-show-more-btn', 'awards-show-more-count', 2, 'awards');
 
   document.querySelectorAll('.exp-toggle').forEach(btn => {

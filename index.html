@@ -738,22 +738,90 @@
 
         <p class="certs-note fade-up">Certificates marked <strong>Verify</strong> link to the issuing platform. All others open the original certificate document.</p>
 
+        <div class="cert-filter fade-up">
+          <button class="cert-filter-btn active" data-filter="all">All <span class="filter-count"></span></button>
+          <button class="cert-filter-btn" data-filter="recognition">Recognition <span class="filter-count"></span></button>
+          <button class="cert-filter-btn" data-filter="ml">Machine Learning &amp; AI <span class="filter-count"></span></button>
+          <button class="cert-filter-btn" data-filter="bi">BI &amp; Visualisation <span class="filter-count"></span></button>
+          <button class="cert-filter-btn" data-filter="tools">Data &amp; Tools <span class="filter-count"></span></button>
+        </div>
+
         <div class="certs-grid">
 
-          <!-- Most recognised / verifiable first -->
-          <div class="cert-card fade-up">
-            <div class="cert-issuer">Stanford Online</div>
-            <div class="cert-name">SQL</div>
-            <div class="cert-date">May 2019</div>
+          <div class="cert-card fade-up" data-category="bi">
+            <div class="cert-issuer">Microsoft Learn</div>
+            <div class="cert-name">Microsoft Learn Achievement</div>
+            <div class="cert-date">2026</div>
             <div class="cert-verify">
-              <a class="cert-link" href="https://verify.lagunita.stanford.edu/SOA/cfa689f0b8fc44608e5bc1aa5fdaab99" target="_blank" rel="noopener">
-                Verify Certificate
+              <a class="cert-link" href="assets/certificates/Achievements%20-%20malikadnana-3930%20_%20Microsoft%20Learn.pdf" target="_blank" rel="noopener">
+                View Certificate
                 <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
               </a>
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="bi">
+            <div class="cert-issuer">Microsoft Learn</div>
+            <div class="cert-name">Discover Data Analysis</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/Achievements%20-%20malikadnana-3930%20_%20Microsoft%20Learn%20Discover%20data%20analysis.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="bi">
+            <div class="cert-issuer">Microsoft Learn</div>
+            <div class="cert-name">Get Started Building in Power BI</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/Achievements%20-%20malikadnana-3930%20_%20Microsoft%20Learn%20Get%20Started%20Builiding%20in%20PowerBI.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="bi">
+            <div class="cert-issuer">Microsoft Learn</div>
+            <div class="cert-name">Copilot in Power BI</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/Achievements%20-%20malikadnana-3930%20_%20Microsoft%20Learn%20Copilot%20in%20PowerBI.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="bi">
+            <div class="cert-issuer">QA</div>
+            <div class="cert-name">Certificate of Attendance - Power BI QA Course</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/Certificate%20of%20Attendance%20-%20PowerBI%20QA%20course.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Most recognised / verifiable first -->
+          <div class="cert-card fade-up" data-category="tools">
+            <div class="cert-issuer">Stanford Online</div>
+            <div class="cert-name">SQL</div>
+            <div class="cert-date">May 2019</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/SQL-Stanford.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="ml">
             <div class="cert-issuer">DataCamp</div>
             <div class="cert-name">Data Scientist with Python Track</div>
             <div class="cert-date">November 2020</div>
@@ -765,7 +833,7 @@
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="recognition">
             <div class="cert-issuer">Royal Statistical Society</div>
             <div class="cert-name">Certificate of Commendation — MSc Poster Session</div>
             <div class="cert-date">July 2022 · University of Leeds</div>
@@ -777,31 +845,31 @@
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="ml">
             <div class="cert-issuer">LinkedIn Learning</div>
             <div class="cert-name">Advanced SQL for Data Scientists</div>
             <div class="cert-date">August 2021</div>
             <div class="cert-verify">
-              <a class="cert-link" href="https://www.linkedin.com/learning/certificates/ASkNhjW_Mo_7R5Ztkoj3foGl83az" target="_blank" rel="noopener">
-                Verify Certificate
+              <a class="cert-link" href="assets/certificates/Advanced-SQL-LinkedIn.pdf" target="_blank" rel="noopener">
+                View Certificate
                 <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
               </a>
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="ml">
             <div class="cert-issuer">LinkedIn Learning</div>
             <div class="cert-name">Applied Machine Learning: Foundations</div>
             <div class="cert-date">August 2021</div>
             <div class="cert-verify">
-              <a class="cert-link" href="https://www.linkedin.com/learning/certificates/Ae7EvvlUPtRdhTTSeaUUI3Mbsqrz" target="_blank" rel="noopener">
-                Verify Certificate
+              <a class="cert-link" href="assets/certificates/Applied-ML-LinkedIn.pdf" target="_blank" rel="noopener">
+                View Certificate
                 <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
               </a>
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="ml">
             <div class="cert-issuer">Simplilearn</div>
             <div class="cert-name">Machine Learning Advanced Certification Training</div>
             <div class="cert-date">May 2020</div>
@@ -813,7 +881,31 @@
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="ml">
+            <div class="cert-issuer">Claude</div>
+            <div class="cert-name">Claude 101</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="https://verify.skilljar.com/c/w9xvc8x7tzhh" target="_blank" rel="noopener">
+                Verify Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="ml">
+            <div class="cert-issuer">AI for Work</div>
+            <div class="cert-name">Future-Proof Your Career with AI</div>
+            <div class="cert-date">2026</div>
+            <div class="cert-verify">
+              <a class="cert-link" href="assets/certificates/AI%20for%20Work%20Future-Proof%20Your%20Career%20with%20AI.pdf" target="_blank" rel="noopener">
+                View Certificate
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="cert-card fade-up" data-category="tools">
             <div class="cert-issuer">Simplilearn</div>
             <div class="cert-name">Big Data Hadoop and Spark Developer</div>
             <div class="cert-date">January 2020</div>
@@ -825,7 +917,7 @@
             </div>
           </div>
 
-          <div class="cert-card fade-up">
+          <div class="cert-card fade-up" data-category="tools">
             <div class="cert-issuer">LatentView Analytics</div>
             <div class="cert-name">Analytics Bootcamp 101</div>
             <div class="cert-date">June 2019</div>
