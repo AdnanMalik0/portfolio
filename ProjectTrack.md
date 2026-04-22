@@ -37,6 +37,8 @@ Rule:
 - `2026-04-22`: certificate filter priority was reordered to lead with `Recognition`, and certificate display order was updated to rank recognition first, then ML/AI, then BI, then tools
 - `2026-04-22`: certificate filters were adjusted again so `All` is first and selected by default; the collapsed default `All` view now highlights three curated certificates, while expanded `All` still follows the full agreed value ranking
 - `2026-04-22`: favicon branding was updated to match the nav logo style with `A.` on a white background, and `CLAUDE.md` was refreshed with the latest certificate and favicon handoff context for future Claude Code sessions
+- `2026-04-22`: social/share metadata was corrected so `og:image` and related tags use absolute GitHub Pages URLs instead of relative paths, which should unblock WhatsApp and similar link previews from finding the preview image
+- `2026-04-22`: a dedicated social preview image `assets/images/og-preview.png` was generated from the `A.` branding and wired into the Open Graph/Twitter image metadata to replace the headshot as the shared link thumbnail
 
 ## GitHub Coverage Check For Portfolio Projects
 
@@ -112,6 +114,8 @@ Chunked implementation plan:
 - Reordered the certificate experience to prioritise `Recognition` in filters and rank certificates by portfolio value rather than by file-add order
 - Updated the default certificate landing state so visitors first see a curated top-three (`Certificate of Commendation`, `Data Scientist with Python Track`, `Applied Machine Learning: Foundations`) before expanding the full ranked list
 - Updated the site favicon to an `A.` mark derived from the top-left `Adnan.` branding, and added `assets/images/favicon-review.svg` as the standalone review/source SVG for future favicon iterations
+- Updated `index.html` share metadata to include canonical URL, absolute `og:url`, absolute `og:image`, image dimensions/type/alt, and `twitter:image` so social scrapers are not relying on relative asset paths
+- Replaced the social preview source image with a dedicated branded card (`assets/images/og-preview.png`) so WhatsApp and similar apps are not relying on the headshot for link thumbnails
 
 ### 2026-04-20
 

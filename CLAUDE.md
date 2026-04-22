@@ -29,6 +29,7 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
 ## Current working context
 
 - Certificates were expanded on 2026-04-22 with new local files in `assets/certificates/`
+- The site now has a dedicated social preview image at `assets/images/og-preview.png`
 - The certificates section now uses filter chips in `index.html`
 - Filter order is: `All`, `Recognition`, `Machine Learning & AI`, `BI & Visualisation`, `Data & Tools`
 - Default certificate landing state is intentionally curated: when `All` is selected and collapsed, show these three first:
@@ -46,6 +47,15 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
   - The old LinkedIn Learning verification URLs for `Advanced SQL for Data Scientists` and `Applied Machine Learning: Foundations` were failing and were replaced with local PDFs
   - The Stanford SQL verification hostname did not resolve during the live check and was replaced with the local PDF
 - If a verification link breaks again, fall back to the local PDF in `assets/certificates/`
+
+## Share preview rules
+
+- Do not rely on the favicon for WhatsApp or social link previews
+- The favicon and the share image are intentionally different assets with different purposes:
+  - browser tab icon: inline favicon in `index.html`
+  - social preview card: `assets/images/og-preview.png`
+- `og:url`, `og:image`, `og:image:*`, canonical URL, and `twitter:image` should always use absolute GitHub Pages URLs
+- If link previews break again, check the deployed HTML first and confirm it is not still serving a relative `og:image` path
 
 ## Known follow-up items
 
