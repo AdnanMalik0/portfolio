@@ -1,4 +1,4 @@
-# CLAUDE.md — Portfolio Project
+# CLAUDE.md - Portfolio Project
 
 ## Start of every session
 
@@ -9,7 +9,7 @@ Read `ProjectTrack.md` before doing anything else. It is the running handoff log
 - Known gaps and missing assets
 - Next likely work items
 
-Treat `ProjectTrack.md` the way you would treat a senior engineer's handoff note — it is the authoritative source of truth for what has been done and what still needs doing.
+Treat `ProjectTrack.md` the way you would treat a senior engineer's handoff note - it is the authoritative source of truth for what has been done and what still needs doing.
 
 ## After meaningful changes
 
@@ -25,3 +25,30 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
 - Project popup notes: `project-details/*.md` (source) and embedded in `project-note-content.js` (runtime)
 - Deployed via GitHub Pages from `main` branch root: `https://adnanmalik0.github.io/portfolio`
 - Git remote: `git@github.com:AdnanMalik0/portfolio.git`
+
+## Current working context
+
+- Certificates were expanded on 2026-04-22 with new local files in `assets/certificates/`
+- The certificates section now uses filter chips in `index.html`
+- Filter order is: `All`, `Recognition`, `Machine Learning & AI`, `BI & Visualisation`, `Data & Tools`
+- Default certificate landing state is intentionally curated: when `All` is selected and collapsed, show these three first:
+  - `Certificate of Commendation - MSc Poster Session`
+  - `Data Scientist with Python Track`
+  - `Applied Machine Learning: Foundations`
+- When the visitor expands `Show all certificates`, the full list should follow the agreed ranking logic in `assets/js/main.js`
+- Certificate ordering is currently enforced in JavaScript, not only by HTML order. Check `certOrderRank` and `certFeaturedRank` before changing certificate cards.
+
+## Certificate link rules
+
+- Prefer issuer verification links only when they are confirmed working
+- As of 2026-04-22:
+  - `Claude 101` uses a working Skilljar verification link
+  - The old LinkedIn Learning verification URLs for `Advanced SQL for Data Scientists` and `Applied Machine Learning: Foundations` were failing and were replaced with local PDFs
+  - The Stanford SQL verification hostname did not resolve during the live check and was replaced with the local PDF
+- If a verification link breaks again, fall back to the local PDF in `assets/certificates/`
+
+## Known follow-up items
+
+- Add `Encore Award` certificate file and link it into the site when available
+- Add `Innovator Award` certificate file and link it into the site when available
+- If certificate ordering changes, update both the visible filter order in `index.html` and the ranking logic in `assets/js/main.js`
