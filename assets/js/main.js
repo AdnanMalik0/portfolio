@@ -200,6 +200,20 @@
       "Inference examples covering promotion, transfer, dismissal, and salary penalties."
     ],
     noteFile: "project-details/workplace-reasoning-knowledge-base.md"
+  },
+  "task-tracker": {
+    summary: "A self-built React SPA for daily task planning with calendar scheduling, day views, ordered task steps, and checklist-based progress tracking. It includes a Cloudflare Workers backend with D1 database for cloud sync alongside local browser persistence and JSON export/import.",
+    highlights: [
+      "Built a multi-screen React app with calendar, day, and task-detail views and a Task Now jump-to-current flow.",
+      "Added local browser persistence and JSON export/import for full data portability independent of the backend.",
+      "Implemented a Cloudflare Workers backend with D1 for lightweight cross-device state sync, sized intentionally for a single-user tool."
+    ],
+    assets: [
+      "A working React frontend codebase with context-driven state management across multiple screens.",
+      "A Cloudflare Workers backend with D1 persistence for snapshot-based state sync.",
+      "A Wrangler-based deployment setup for Cloudflare Pages."
+    ],
+    noteFile: "project-details/task-tracker.md"
   }
 };
 

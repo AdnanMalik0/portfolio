@@ -55,6 +55,7 @@ Projects listed in the portfolio that still **do not have matching local note co
 
 Projects already covered by local GitHub-derived markdown notes:
 
+- Task Tracker App
 - ML for Solubility Prediction of Chemical Compounds
 - MLP Classification with PyTorch (MNIST)
 - Mobile Phone Price-Range Prediction
@@ -103,6 +104,16 @@ Chunked implementation plan:
 - Chunk 5: verify the updated JavaScript and modal hooks
 
 ## Latest Change Log
+
+### 2026-04-25
+
+- Added `Task Tracker App` as the 15th project card (`data-project="task-tracker"`, `data-category="engineering"`)
+- GitHub link: `https://github.com/AdnanMalik0/task-tracker-app` — no public live URL (app is behind Cloudflare Access auth)
+- Created `project-details/task-tracker.md` with a full portfolio-style note
+- Added `"task-tracker"` entry to `PROJECT_DETAILS` in `assets/js/main.js`
+- Added embedded note content to `assets/js/project-note-content.js`
+- Updated filter counts in `index.html`: All 14 → 15, Engineering & Systems 2 → 3
+- Card placed as "Engineering 3" after the Prolog KB card in the HTML
 
 ### 2026-04-22
 
