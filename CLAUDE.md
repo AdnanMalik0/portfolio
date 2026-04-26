@@ -31,6 +31,8 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
 - Certificates were expanded on 2026-04-22 with new local files in `assets/certificates/`
 - The site now has a dedicated social preview image at `assets/images/og-preview.png`
 - The certificates section now uses filter chips in `index.html`
+- The top navigation now includes a `Recognition` item that links to the awards/recognition section via `#awards`
+- Three recognition cards now include local evidence links: `Certificate of Commendation`, `Certificate of Merit — Best Project`, and `Certificate of Appreciation`
 - Filter order is: `All`, `Recognition`, `Machine Learning & AI`, `BI & Visualisation`, `Data & Tools`
 - Default certificate landing state is intentionally curated: when `All` is selected and collapsed, show these three first:
   - `Certificate of Commendation - MSc Poster Session`
@@ -60,5 +62,5 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
 ## Known follow-up items
 
 - Add `Encore Award` certificate file and link it into the site when available
-- Add `Innovator Award` certificate file and link it into the site when available
+- Add `Reward of Excellence` certificate file and link it into the site when available
 - If certificate ordering changes, update both the visible filter order in `index.html` and the ranking logic in `assets/js/main.js`
