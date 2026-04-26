@@ -16,7 +16,9 @@ Rule:
 - Photo status: `assets/images/photo.jpg` exists and is linked in the site
 - Certificates status: local certificate files exist in `assets/certificates/`
 - Certificates UI status: the certificates section now supports category filters aligned to the site's existing taxonomy (`BI & Visualisation`, `Machine Learning & AI`, `Data & Tools`, `Recognition`)
-- Certificate follow-up reminder: add `Encore Award` and `Innovator Award` certificate files to `assets/certificates/` and link them into the site when available
+- Recognition nav status: the top navigation now includes a `Recognition` anchor that jumps to the awards/recognition section
+- Recognition evidence status: certificate links are now attached inside the recognition cards for the RSS commendation, SRM merit, and SRM appreciation items
+- Certificate follow-up reminder: add `Encore Award` and `Reward of Excellence` certificate files to `assets/certificates/` and link them into the recognition section when available
 - Project screenshots status: `assets/images/projects/` is still empty, so project preview images currently fall back when missing
 - Masarif status: GitHub and live demo links are now present in the project card and spotlight flow
 - Project spotlight status: project cards now open a centered single-column popup/modal with inline markdown content, external links, and internal popup scrolling
@@ -105,6 +107,13 @@ Chunked implementation plan:
 
 ## Latest Change Log
 
+### 2026-04-26
+
+- Added a `Recognition` nav item in `index.html` that links the top bar directly to the `#awards` section
+- Kept the section anchor as `#awards` so existing scrollspy and section behaviour continue to work without JavaScript changes
+- Attached `View Certificate` links inside the recognition cards for `Certificate of Commendation`, `Certificate of Merit — Best Project`, and `Certificate of Appreciation`
+- Left `Reward of Excellence` and `Encore Award` without links because matching certificate files are not yet present in `assets/certificates/`
+
 ### 2026-04-25
 
 - Added `Task Tracker App` as the 15th project card (`data-project="task-tracker"`, `data-category="engineering"`)
@@ -185,6 +194,7 @@ Chunked implementation plan:
 
 ## Next Likely Work Items
 
+- Add `Reward of Excellence` and `Encore Award` certificate files and attach them in the recognition section
 - Add project screenshots to `assets/images/projects/`
 - Test the popup/modal reading flow in a browser, especially the longer `project-details/masarif.md` note and mobile scrolling
 - Add manual images only to selected projects later if needed, now that the popup layout is intentionally text-first
