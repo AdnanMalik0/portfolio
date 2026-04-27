@@ -107,6 +107,17 @@ Chunked implementation plan:
 
 ## Latest Change Log
 
+### 2026-04-27
+
+- Added dark mode with a toggle button in the top navigation (sun/moon icon)
+- Dark mode is the default; user preference is persisted in `localStorage`
+- A flash-prevention inline script in `<head>` sets `data-theme` on `<html>` before CSS loads
+- CSS uses `[data-theme="dark"]` variable overrides: dark background (`#0d1117`), card (`#1a2233`), text (`#e2e8f0`), muted (`#8b9ab5`), lightened accent variants for readability, dark border (`#1e2d3d`)
+- Specific overrides cover header background, project spotlight modal (shell, header, close button, desc, sections, note content text/code/blockquote/table), and education badges
+- Theme toggle button lives in a new `.nav-end` flex wrapper alongside the existing Contact CTA
+- Mobile nav uses CSS `order` to keep logo+toggle on row 1 and links on row 2 (flex-wrap)
+- Light mode is unchanged; toggling shows sun icon (in dark) or moon icon (in light)
+
 ### 2026-04-26
 
 - Added a `Recognition` nav item in `index.html` that links the top bar directly to the `#awards` section
