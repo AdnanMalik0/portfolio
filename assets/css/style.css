@@ -744,7 +744,7 @@ nav {
 }
 
 .project-banner {
-  height: 160px;
+  height: 90px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -1338,7 +1338,46 @@ body.modal-open {
   box-shadow: 0 0 40px rgba(22,163,74,0.15);
   transform: translateY(-5px);
 }
-.contact-icon  { font-size: 2rem; }
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 15px;
+  margin-bottom: 0.35rem;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.contact-icon-email {
+  color: var(--accent);
+  border: 1.5px solid rgba(22,163,74,0.55);
+  background: rgba(22,163,74,0.07);
+  box-shadow: 0 0 14px rgba(22,163,74,0.35), 0 0 32px rgba(22,163,74,0.12), inset 0 0 10px rgba(22,163,74,0.05);
+}
+.contact-card:hover .contact-icon-email {
+  background: rgba(22,163,74,0.13);
+  box-shadow: 0 0 20px rgba(22,163,74,0.55), 0 0 44px rgba(22,163,74,0.2), inset 0 0 14px rgba(22,163,74,0.08);
+}
+.contact-icon-linkedin {
+  color: #38acde;
+  border: 1.5px solid rgba(0,119,181,0.55);
+  background: rgba(0,119,181,0.07);
+  box-shadow: 0 0 14px rgba(0,119,181,0.35), 0 0 32px rgba(0,119,181,0.12), inset 0 0 10px rgba(0,119,181,0.05);
+}
+.contact-card:hover .contact-icon-linkedin {
+  background: rgba(0,119,181,0.13);
+  box-shadow: 0 0 20px rgba(0,119,181,0.55), 0 0 44px rgba(0,119,181,0.2), inset 0 0 14px rgba(0,119,181,0.08);
+}
+.contact-icon-github {
+  color: #c9d1d9;
+  border: 1.5px solid rgba(201,209,217,0.4);
+  background: rgba(201,209,217,0.05);
+  box-shadow: 0 0 14px rgba(201,209,217,0.2), 0 0 32px rgba(201,209,217,0.07), inset 0 0 10px rgba(201,209,217,0.03);
+}
+.contact-card:hover .contact-icon-github {
+  background: rgba(201,209,217,0.09);
+  box-shadow: 0 0 20px rgba(201,209,217,0.38), 0 0 44px rgba(201,209,217,0.13), inset 0 0 14px rgba(201,209,217,0.06);
+}
 .contact-label { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.9); }
 .contact-value { font-size: 0.77rem; color: rgba(255,255,255,0.45); text-align: center; word-break: break-all; }
 

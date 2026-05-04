@@ -107,6 +107,18 @@ Chunked implementation plan:
 
 ## Latest Change Log
 
+### 2026-05-04
+
+- Replaced emoji contact icons with glowing frame SVG icons in the Contact section
+- All three icons use a consistent 62×62px rounded frame (border + layered box-shadow glow) that intensifies on card hover
+- Email: green glowing frame (`var(--accent)` / `#16a34a`) with an outline envelope SVG
+- LinkedIn: LinkedIn blue glowing frame (`#0077B5`) with an outline `in` mark SVG
+- GitHub: silver-white glowing frame (`#c9d1d9`) with an outline octocat SVG
+- CSS: `.contact-icon` converted from `font-size: 2rem` to a sized flex container; per-icon colour, border, and glow rules added in `style.css`
+- About Me location changed from `Daventry, United Kingdom` to `Coventry, United Kingdom`
+- Project card banner height reduced from `160px` to `90px` for a slimmer ribbon
+- Education degree label corrected to `BTech Electrical & Electronics Engineering` (reverted a brief `BEng/BTech` experiment)
+
 ### 2026-04-27
 
 - Added dark mode with a toggle button in the top navigation (sun/moon icon)
