@@ -422,10 +422,16 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
 }
 
 /* ── Front face: dark glass ─────────────────────────── */
 .photo-front {
+  /* translateZ(1px): front face sits 1px closer to viewer.
+     rotateY(180deg) inverts Z, so back face's translateZ(1px) maps to Z=-1px
+     in container space — always behind front face at rest, always in front when flipped.
+     This explicit Z-separation fixes Safari/iOS backface bleed-through. */
+  transform: translateZ(1px);
   background:
     radial-gradient(ellipse at 35% 28%, rgba(22,163,74,0.13) 0%, transparent 60%),
     #020d04;
@@ -502,7 +508,9 @@ nav {
 /* ── Back face: photo ───────────────────────────────── */
 .photo-back {
   background: #010c04;
-  transform: rotateY(180deg);
+  /* rotateY(180deg) inverts Z, so translateZ(1px) in local space → Z=-1px in
+     container space: back face sits behind front face at rest, in front when flipped */
+  transform: rotateY(180deg) translateZ(1px);
 }
 .photo-back img {
   width: 100%; height: 100%;
