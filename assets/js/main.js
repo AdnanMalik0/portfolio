@@ -228,6 +228,35 @@ document.addEventListener('DOMContentLoaded', () => {
     heroPhoto.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
     });
+
+    // Auto-hint flip — plays once per page load when photo enters view
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let hinted = false;
+      let userInteracted = false;
+      let hintTimer = null;
+
+      // Cancel hint if user engages the card first
+      heroPhoto.addEventListener('pointerenter', () => { userInteracted = true; }, { once: true });
+      heroPhoto.addEventListener('click',        () => { userInteracted = true; }, { once: true });
+
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !hinted) {
+          hinted = true;
+          hintTimer = setTimeout(() => {
+            if (userInteracted) return;
+            heroPhoto.classList.add('flipped');          // flip to photo
+            setTimeout(() => {
+              heroPhoto.classList.remove('flipped');     // flip back
+            }, 1820);                                    // 720ms flip-in + 1100ms hold
+          }, 1400);                                      // wait for page to settle
+        } else if (!entries[0].isIntersecting) {
+          clearTimeout(hintTimer);                       // scrolled away before hint fired
+        }
+      }, { threshold: 0.6 });
+
+      const heroWrap = document.querySelector('.hero-photo-wrap');
+      if (heroWrap) observer.observe(heroWrap);
+    }
   }
 
   const themeToggle = document.getElementById('themeToggle');
