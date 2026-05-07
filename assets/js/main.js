@@ -229,19 +229,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
     });
 
-    // Auto-hint flip — plays once per page load when photo enters view
+    // Auto-hint flip — replays every time photo scrolls into view
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let hinted = false;
       let userInteracted = false;
       let hintTimer = null;
 
       // Cancel hint if user engages the card first
-      heroPhoto.addEventListener('pointerenter', () => { userInteracted = true; }, { once: true });
-      heroPhoto.addEventListener('click',        () => { userInteracted = true; }, { once: true });
+      heroPhoto.addEventListener('pointerenter', () => { userInteracted = true; });
+      heroPhoto.addEventListener('click',        () => { userInteracted = true; });
 
       const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && !hinted) {
-          hinted = true;
+        if (entries[0].isIntersecting) {
+          userInteracted = false;                        // fresh start each scroll-in
           hintTimer = setTimeout(() => {
             if (userInteracted) return;
             heroPhoto.classList.add('flipped');          // flip to photo
@@ -249,8 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
               heroPhoto.classList.remove('flipped');     // flip back
             }, 1820);                                    // 720ms flip-in + 1100ms hold
           }, 1400);                                      // wait for page to settle
-        } else if (!entries[0].isIntersecting) {
-          clearTimeout(hintTimer);                       // scrolled away before hint fired
+        } else {
+          clearTimeout(hintTimer);                       // scrolled away — cancel or reset
+          heroPhoto.classList.remove('flipped');
         }
       }, { threshold: 0.6 });
 
