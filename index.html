@@ -138,10 +138,13 @@
 
           <div class="hero-photo-wrap">
             <div class="hero-photo-ring">
-              <div class="hero-photo">
-                <!-- Replace photo.jpg in assets/images/ with your professional headshot -->
-                <img src="assets/images/photo.jpg" alt="Adnan Malik" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
-                <div class="photo-initials">AM</div>
+              <div class="hero-photo" tabindex="0" role="button" aria-label="Profile — tap to flip">
+                <div class="photo-front">
+                  <span class="photo-initials-text">AM<span>.</span></span>
+                </div>
+                <div class="photo-back">
+                  <img src="assets/images/photo.jpg" alt="Adnan Malik">
+                </div>
               </div>
             </div>
           </div>

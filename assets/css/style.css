@@ -387,39 +387,126 @@ nav {
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; }
 
-/* Photo */
-.hero-photo-wrap { flex-shrink: 0; }
+/* Photo — flip card */
+.hero-photo-wrap { flex-shrink: 0; perspective: 680px; }
 .hero-photo-ring {
   padding: 4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #166534);
-  box-shadow: 0 0 0 8px rgba(22,163,74,0.1), var(--shadow-lg);
+  background: linear-gradient(135deg, #3a3a3a, #1e1e1e);
+  box-shadow: 0 0 0 8px rgba(180,180,180,0.07), var(--shadow-lg);
 }
 .hero-photo {
   width: 240px; height: 240px;
   border-radius: 50%;
+  border: 3px solid #0e0e0e;
+  background: #111111;
+  position: relative;
+  transform-style: preserve-3d;
+  /* fast snap through 90°, decelerate into landing — glass physical feel */
+  transition: transform 0.72s cubic-bezier(0.77, 0, 0.175, 1);
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .hero-photo:hover { transform: rotateY(180deg); }
+}
+.hero-photo.flipped { transform: rotateY(180deg); }
+
+.photo-front,
+.photo-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, #052e16, #021a0c);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid var(--hero-bg);
 }
-.hero-photo img {
+
+/* ── Front face: dark glass ─────────────────────────── */
+.photo-front {
+  background:
+    radial-gradient(ellipse at 35% 28%, rgba(22,163,74,0.13) 0%, transparent 60%),
+    #020d04;
+  box-shadow:
+    inset 0 0 0 1px rgba(22,163,74,0.2),
+    inset 0 6px 28px rgba(22,163,74,0.06);
+}
+
+/* Static catch-light — top-left specular highlight, always visible */
+.photo-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 26% 20%, rgba(255,255,255,0.18) 0%, transparent 42%),
+    linear-gradient(145deg, rgba(255,255,255,0.07) 0%, transparent 38%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Animated sheen strip — sweeps across on flip */
+.photo-front::before {
+  content: '';
+  position: absolute;
+  top: -10%; bottom: -10%;
+  left: 0;
+  width: 42%;
+  transform: skewX(-10deg) translateX(-170%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.14) 35%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(255,255,255,0.14) 65%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+@media (hover: hover) {
+  .hero-photo:hover .photo-front::before {
+    animation: glass-sweep 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+}
+.hero-photo.flipped .photo-front::before {
+  animation: glass-sweep 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes glass-sweep {
+  0%   { transform: skewX(-10deg) translateX(-170%); opacity: 0; }
+  12%  { opacity: 1; }
+  75%  { opacity: 0.7; }
+  100% { transform: skewX(-10deg) translateX(360%); opacity: 0; }
+}
+
+.photo-initials-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  letter-spacing: -3px;
+  color: rgba(255,255,255,0.95);
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 0 28px rgba(22,163,74,0.3);
+  position: relative;
+  z-index: 1;
+}
+.photo-initials-text span {
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(22,163,74,0.65);
+}
+
+/* ── Back face: photo ───────────────────────────────── */
+.photo-back {
+  background: #010c04;
+  transform: rotateY(180deg);
+}
+.photo-back img {
   width: 100%; height: 100%;
   object-fit: cover;
-}
-.photo-initials {
-  display: none;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #fff, #67e8f9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -3px;
-  pointer-events: none;
 }
 
 /* Stats bar below hero content */

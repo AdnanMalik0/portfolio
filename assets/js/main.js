@@ -218,6 +218,18 @@
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Flip DP on tap (touch/non-hover devices); hover handles desktop via CSS
+  const heroPhoto = document.querySelector('.hero-photo');
+  if (heroPhoto) {
+    const toggleFlip = () => heroPhoto.classList.toggle('flipped');
+    heroPhoto.addEventListener('click', () => {
+      if (!window.matchMedia('(hover: hover)').matches) toggleFlip();
+    });
+    heroPhoto.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
+    });
+  }
+
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
     const updateLabel = theme => {

@@ -107,6 +107,16 @@ Chunked implementation plan:
 
 ## Latest Change Log
 
+### 2026-05-07
+
+- Added hover-to-flip profile picture in the hero section
+- By default the circle shows "AM." initials — Plus Jakarta Sans weight 800, white text, green period matching the nav-logo style
+- Hovering on desktop (CSS `@media (hover: hover)`) flips the card 180° to reveal `assets/images/photo.jpg`
+- Tapping on mobile toggles a `.flipped` class (JS checks `matchMedia('(hover: hover)')` to avoid double-firing on desktop)
+- Keyboard users can also flip with Enter or Space
+- Implementation: `.photo-front` / `.photo-back` faces inside `.hero-photo` with `transform-style: preserve-3d`, `backface-visibility: hidden`, and a `rotateY(180deg)` transition
+- Old `onload`/`onerror` inline handlers and `.photo-initials` fallback removed; replaced by the structured flip card markup
+
 ### 2026-05-04
 
 - Replaced emoji contact icons with glowing frame SVG icons in the Contact section
