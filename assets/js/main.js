@@ -222,13 +222,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroPhoto = document.querySelector('.hero-photo');
   if (heroPhoto) {
     const toggleFlip = () => heroPhoto.classList.toggle('flipped');
-    // Always toggle on click — no matchMedia guard (Android matchMedia can be unreliable)
+
+    // touchend + preventDefault is the most reliable tap handler on Android/iOS.
+    // preventDefault cancels the synthesised click Chrome generates after touch,
+    // so toggleFlip() is guaranteed to run exactly once per tap.
+    heroPhoto.addEventListener('touchend', e => {
+      e.preventDefault();
+      toggleFlip();
+    }, { passive: false });
+
+    // click covers mouse and keyboard-activated clicks (won't fire after
+    // touchend + preventDefault, so no double-toggle on touch devices)
     heroPhoto.addEventListener('click', toggleFlip);
-    // On hover-capable devices clear .flipped on mouse-leave so desktop hover
-    // doesn't leave the card stuck in the flipped state after a click
-    if (window.matchMedia('(hover: hover)').matches) {
-      heroPhoto.addEventListener('mouseleave', () => heroPhoto.classList.remove('flipped'));
-    }
+
     heroPhoto.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
     });
