@@ -218,13 +218,17 @@
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Flip DP on tap (touch/non-hover devices); hover handles desktop via CSS
+  // Flip DP — tap/click toggles on all devices
   const heroPhoto = document.querySelector('.hero-photo');
   if (heroPhoto) {
     const toggleFlip = () => heroPhoto.classList.toggle('flipped');
-    heroPhoto.addEventListener('click', () => {
-      if (!window.matchMedia('(hover: hover)').matches) toggleFlip();
-    });
+    // Always toggle on click — no matchMedia guard (Android matchMedia can be unreliable)
+    heroPhoto.addEventListener('click', toggleFlip);
+    // On hover-capable devices clear .flipped on mouse-leave so desktop hover
+    // doesn't leave the card stuck in the flipped state after a click
+    if (window.matchMedia('(hover: hover)').matches) {
+      heroPhoto.addEventListener('mouseleave', () => heroPhoto.classList.remove('flipped'));
+    }
     heroPhoto.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
     });
@@ -252,7 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
           clearTimeout(hintTimer);                       // scrolled away — cancel or reset
           heroPhoto.classList.remove('flipped');
         }
-      }, { threshold: 0.6 });
+      // threshold 0.3: low enough that tap micro-scrolls can't accidentally
+      // bounce the card out of the intersecting state and reset the hint
+      }, { threshold: 0.3 });
 
       const heroWrap = document.querySelector('.hero-photo-wrap');
       if (heroWrap) observer.observe(heroWrap);
