@@ -321,32 +321,6 @@ nav {
 }
 .hero-content { flex: 1; }
 
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.38rem 0.95rem;
-  background: rgba(22,163,74,0.12);
-  border: 1px solid rgba(22,163,74,0.25);
-  color: #67e8f9;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  margin-bottom: 1.4rem;
-  letter-spacing: 0.3px;
-  backdrop-filter: blur(8px);
-}
-.hero-label-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #16a34a;
-  box-shadow: 0 0 0 3px rgba(22,163,74,0.3);
-  animation: pulse 2.2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(22,163,74,0.3); }
-  50%       { box-shadow: 0 0 0 6px rgba(22,163,74,0.1); }
-}
 
 .hero-content h1 {
   background: linear-gradient(135deg, #ffffff 0%, #67e8f9 100%);
