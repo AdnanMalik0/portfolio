@@ -107,6 +107,13 @@ Chunked implementation plan:
 
 ## Latest Change Log
 
+### 2026-06-22
+
+- Removed the "Open to Opportunities" hero label badge from the top of the hero section
+- Deleted the HTML div (`.hero-label` + `.hero-label-dot` span) from `index.html`
+- Removed the associated CSS rules (`.hero-label`, `.hero-label-dot`, `@keyframes pulse`) from `assets/css/style.css`
+- Committed and pushed to `origin/main`
+
 ### 2026-05-07
 
 - Added hover-to-flip profile picture in the hero section

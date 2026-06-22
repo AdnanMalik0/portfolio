@@ -214,6 +214,34 @@
       "A Wrangler-based deployment setup for Cloudflare Pages."
     ],
     noteFile: "project-details/task-tracker.md"
+  },
+  "olympic-medal": {
+    summary: "A statistical learning project predicting Olympic medal counts from national population and GDP data. The work compares multiple regression approaches suited to count outcomes, including standard linear, log-transformed, Poisson, and Negative Binomial models.",
+    highlights: [
+      "Compared four regression formulations for count data: linear, log-linear, Poisson, and Negative Binomial.",
+      "Applied sensitivity testing across Negative Binomial theta values to understand model stability.",
+      "Evaluated predictive performance against actual 2016 Rio Olympic results including outlier analysis."
+    ],
+    assets: [
+      "A statistical learning assignment covering model selection and regression on count data.",
+      "National population, GDP, and medal count data from Beijing 2008, London 2012, and Rio 2016.",
+      "Prediction-vs-actual comparison for 2016 Olympic results."
+    ],
+    noteFile: "project-details/olympic-medal-prediction.md"
+  },
+  "brexit-vote": {
+    summary: "A logistic regression classification project applied to the 2016 Brexit referendum outcome at electoral-ward level. The work focuses on interpretability, variable selection, and comparing model findings against media-level analysis.",
+    highlights: [
+      "Used demographic features including income, age, education level, social class, and country of birth.",
+      "Applied cross-validation across different variable combinations to find the most explanatory model.",
+      "Compared coefficient interpretation against Guardian media analysis of the Brexit result."
+    ],
+    assets: [
+      "A statistical learning assignment covering logistic regression and classification on political data.",
+      "Electoral-ward-level demographic and voting outcome data from the 2016 Brexit referendum.",
+      "Model comparison and interpretability analysis against published media commentary."
+    ],
+    noteFile: "project-details/brexit-vote-analysis.md"
   }
 };
 

@@ -28,6 +28,7 @@ Never run `git push` automatically. Commit locally and wait for the user to appr
 
 ## Current working context
 
+- The hero section no longer has an "Open to Opportunities" label/badge — it was removed on 2026-06-22 along with its CSS (`.hero-label`, `.hero-label-dot`, `@keyframes pulse`)
 - Certificates were expanded on 2026-04-22 with new local files in `assets/certificates/`
 - The site now has a dedicated social preview image at `assets/images/og-preview.png`
 - The certificates section now uses filter chips in `index.html`
